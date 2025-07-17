@@ -47,12 +47,12 @@ class Dictionary:
         hash(key)
         index_of_cell = self._get_index_(key)
         if self.table[index_of_cell] is None:
-            raise KeyError(f"Key: {key} not found")
+            raise KeyError("Key not found")
         else:
             for i, (k, v, h) in enumerate(self.table[index_of_cell]):
                 if key == k:
                     return v
-            raise KeyError("Keys are different")
+            raise KeyError("Key not found")
 
     def __len__(self) -> int:
         return self.size
@@ -64,6 +64,8 @@ class Dictionary:
     def __delitem__(self, key: Any) -> None:
         hash(key)
         index_of_cell = self._get_index_(key)
+        if self.table[index_of_cell] is None:
+            raise KeyError("Key not found")
         for i, (k, v, h) in enumerate(self.table[index_of_cell]):
             if key == k:
                 del self.table[index_of_cell][i]
